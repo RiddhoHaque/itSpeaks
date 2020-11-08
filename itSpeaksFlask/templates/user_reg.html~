@@ -1,0 +1,143 @@
+{% extends "flashedMessages.html" %}
+<section>
+<div class = "container">     
+	<style type="text/css">
+          #map{ width:100%; height: 500px; }
+     </style>
+	 <div class="jumbotron">
+	    <h1>Signup</h1>
+		<fieldset>
+		<p>
+		<form class="form-signin" action="/signUp" method="post">
+			<fieldset>		    
+				<label for="inputName" class="sr-only">Name</label>
+		    	<input type="name" name="inputName" id="inputName" class="form-control" placeholder="Name" required autofocus>
+			</fieldset>			
+			<fieldset>			
+				<label for="inputEmail" class="sr-only">Email address</label>
+		    	<input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+			</fieldset>			
+			<fieldset>			
+				<label for="Gender" class="sr-only">Gender</label>		    
+				<fieldset>
+					<input type="radio" name="gender" value="male"> Male<br>
+		  			<input type="radio" name="gender" value="female"> Female<br>
+		  			<input type="radio" name="gender" value="other"> Other
+				</fieldset>			
+			</fieldset>		    
+			<fieldset>			
+				<label for="Age" class="sr-only">Age</label>		    
+				<input type="age" name="inputAge" id="inputAge" class="form-control" placeholder="21" required autofocus>			
+			</fieldset>		    
+			<fieldset>
+				<label for="inputUsername" class="sr-only">Username</label>
+		    	<input type="username" name="inputUsername" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+		    	<label for="inputPassword" class="sr-only">Password</label>
+		    	<input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>	
+			</fieldset>			
+			<fieldset>			
+				<label for="nature">
+		        	<span>Which of the following best describes you?</span>
+	        	</label>			
+			
+				<select id="nature" name="nature">
+	        		<option value="introvert">Introvert</option>
+        			<option value="extrovert">Extrovert</option>
+        			<option value="ambivert">Ambivert</option>
+     	    	</select>
+			</fieldset>
+			<fieldset>
+				<legend>Choose your interests</legend>
+				<div>
+					<input type="checkbox" id="Nonfiction" name="interest" value=0>
+					<label for="Nonfiction">Nonfiction</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Essay" name="interest" value=1>
+					<label for="Essay">Essay</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Biography" name="interest" value=2>
+					<label for="Biography">Biography</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Autobiography" name="interest" value=3>
+					<label for="Autobiography">Autobiography</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Speech" name="interest" value=4>
+					<label for="Speech">Speech</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Drama" name="interest" value=5>
+					<label for="Drama">Drama</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Poetry" name="interest" value=6>
+					<label for="Poetry">Poetry</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Fantasy" name="interest" value=7>
+					<label for="Fantasy">Fantasy</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Humor" name="interest" value=8>
+					<label for="Humor">Humor</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Fable" name="interest" value=9>
+					<label for="Fable">Fable</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Fairy Tales" name="interest" value=10>
+					<label for="Fairy Tales">Fairy Tales</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Science Fiction" name="interest" value=11>
+					<label for="Science Fiction">Science Fiction</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Shorts" name="interest" value=12>
+					<label for="Shorts">Shorts</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Realistic Fiction" name="interest" value=13>
+					<label for="Realistic Fiction">Realistic Fiction</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Folklore" name="interest" value=14>
+					<label for="Folklore">Folklore</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Historical Fiction" name="interest" value=15>
+					<label for="Historical  Fiction">Historical Fiction</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Horror" name="interest" value=16>
+					<label for="Horror">Horror</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Mystery" name="interest" value=17>
+					<label for="Mystery">Mystery</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Mythology" name="interest" value=18>
+					<label for="Mythology">Mythology</label>
+				</div>
+			</fieldset>
+
+			<input type="submit" name='btn' value="Submit"  /
+		    	input[type=submit] {
+		    	padding:5px 15px; 
+		    	background:#ccc; 
+		    	border:0 none;
+		    	cursor:pointer;
+		    	-webkit-border-radius: 5px;
+		    	border-radius: 5px; 
+			}>
+    	</form>
+		</p>
+		</fieldset>
+	 </div>
+</div>
+</section>

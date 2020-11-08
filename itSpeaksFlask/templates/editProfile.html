@@ -1,0 +1,127 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+	<link rel="stylesheet" href="/static/style.css"> 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<div class="container" style="background: url(/static/img/cover.jpg) fixed;background-size:cover;">
+	<div class="topnav">
+		<a class="topnavLogo" href="home.html"><img src="/static/img/logo.png" style="width:13.5vw;height;auto;"></a>
+		<form class="topNavSearch" method="post" action="/search" >
+			<input class="topNavSearchBar" name="searchBar" id="searchBar" type="text" placeholder="Search..." style="padding-left:10;">
+			<button class="fa fa-search" type="submit" style="position:absolute;
+												width:3vw;
+												height:3vw;
+												border:none;
+												border-radius:0.75vw;
+												left:60vw;
+												top:.75vw;
+												cursor:pointer;">
+			</button>
+		</form>
+		<div class="topnavButtons">
+			<a class="topnavLogo" href="home.html"><img src="/static/img/books.png" style="width:9vw;height;auto;"></a>
+			<a class="topnavLogo" href="profile.html"><img src="/static/img/user.png" style="width:9vw;height;auto;"></a>	  
+			<a class="topnavLogo" href="logout"><img src="/static/img/logout.png" style="width:9vw;height;auto;"></a>
+		</div>
+	</div>
+		    
+	 <div class="formContainer">
+		<form action="/updateProfile"  enctype="multipart/form-data" method="post" style="padding:6vw 15vw">
+			<div class="headerText" style="font-size:2vw">Edit Profile</div>
+
+			<fieldset class="fieldSet">		    
+				<label for="inputName">Name</label>
+				<input type="name" name="inputName" id="inputName" value="{{userInformation.name}}" required autofocus>
+			</fieldset>
+						
+			<fieldset class="fieldSet">			
+				<label for="inputEmail">Email</label>
+				<input type="email" name="inputEmail" id="inputEmail" value="{{userInformation.email}}" required >
+			</fieldset>
+						
+			<fieldset class="fieldSet">			
+				<label for="Gender">Gender</label>		    
+				<fieldset class="fieldSet">
+				{% if userInformation.gender=='male' %}
+					<input type="radio" name="gender" value="male" checked> Male<br>
+				{% else %}
+					<input type="radio" name="gender" value="male"> Male<br>
+				{% endif %}
+				{% if userInformation.gender=='female' %}
+					<input type="radio" name="gender" value="female" checked> Female<br>
+				{% else %}
+					<input type="radio" name="gender" value="female"> Female<br>
+				{% endif %}
+				{% if userInformation.gender=='other' %}
+					<input type="radio" name="gender" value="other" checked> Other<br>
+				{% else %}
+					<input type="radio" name="gender" value="other"> Other<br>
+				{% endif %}
+				</fieldset>			
+			</fieldset>		
+			<fieldset class="fieldSet">			
+				<label for="Age">Age</label>		    
+				<input type="age" name="inputAge" id="inputAge" value="{{userInformation.age}}" required >			
+			</fieldset>		    
+			<fieldset class="fieldSet">			
+				<label for="about">About</label>
+				<textarea type="text" name="about" id="about" style="width:60%;height:15%;" >{{userInformation.about}}</textarea>
+			</fieldset>
+
+			<fieldset class="fieldSet">
+				<label for="oldPassword" >Old password</label>
+				<input type="password" name="oldPassword" id="oldPassword" required><br>
+				<label for="newPassword">New password</label>
+				<input type="password" name="newPassword" id="newPassword">	
+			</fieldset>			
+			<fieldset class="fieldSet">			
+				<label for="nature">
+					<span>Which of the following best describes you?</span>
+				</label>			
+		
+				<select id="nature" name="nature" style="padding:.3vw 1vw;color:teal;border-radius:1vw;opacity:0.85;">
+					{% if userInformation.nature=='introvert' %}
+						<option value="introvert" selected>Introvert</option>
+					{% else %}
+						<option value="introvert" >Introvert</option>
+					{% endif %}						
+					{% if userInformation.nature=='extrovert' %}
+						<option value="extrovert" selected>Extrovert</option>
+					{% else %}
+						<option value="extrovert" >Extrovert</option>
+					{% endif %}						
+					{% if userInformation.nature=='ambivert' %}
+						<option value="ambivert" selected>Ambivert</option>
+					{% else %}
+						<option value="ambivert" >Ambivert</option>
+					{% endif %}						
+				</select>
+			</fieldset>
+			<fieldset class="fieldSet">
+				<legend>Choose your interests</legend>
+				{% for interests in interestList %}
+				<div>
+					{% if interests.isChecked %}
+						<input type="checkbox" id="{{interests.genre}}" name="interest" value={{interests.value}} checked>
+						<label for="{{interests.genre}}">{{interests.genre}}</label><br>
+					{% else %}
+						<input type="checkbox" id="{{interests.genre}}" name="interest" value={{interests.value}}>
+						<label for="{{interests.genre}}">{{interests.genre}}</label><br>
+					{% endif %}
+				</div>
+				
+				{% endfor %}
+				
+			</fieldset class="fieldSet">
+	
+			<fieldset class="fieldSet">
+				<label for=profilePhoto>Upload a new profile picture:</label>
+				<input type="file" name="profilePhoto" id="profilePhoto" style="padding:0 2vw;">
+			</fieldset>
+			
+			<button type="submit" class="buttons" style="margin:1vw;">Update</button>
+		</form>
+	</div>	
+</div>
+
+

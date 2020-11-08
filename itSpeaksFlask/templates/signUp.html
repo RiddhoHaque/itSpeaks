@@ -1,0 +1,155 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
+	<link rel="stylesheet" href="/static/style.css"> 
+</head>
+
+<div class="container" style="background: url(/static/img/pics/signup.jpg) fixed; background-size:cover;">
+	<div class="emptybox"></div>
+	<div class="cardContainer">
+		<img src="/static/img/logo.png" style="width:20vw;opacity:.85;padding:0 10vw;margin-bottom:2vw;">
+		<form method="post" action="/signUp">
+			<fieldset class="fieldSets">		    
+				<label for="inputName" >Name</label>
+				<input type="name" name="inputName" id="inputName" class="form-control" placeholder="Name" required autofocus>
+			</fieldset>			
+			<fieldset class="fieldSets">			
+				<label for="inputEmail" >Email address</label>
+				<input type="email" name="inputEmail" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+			</fieldset>			
+			<fieldset class="fieldSets">			
+				<label for="Gender" >Gender</label>		    
+				<fieldset class="fieldSets">
+					<input type="radio" name="gender" value="male"> Male<br>
+					<input type="radio" name="gender" value="female"> Female<br>
+					<input type="radio" name="gender" value="other"> Other
+				</fieldset>			
+			</fieldset>		    
+			<fieldset class="fieldSets">			
+				<label for="Age" >Age</label>		    
+				<input type="age" name="inputAge" id="inputAge" class="form-control" placeholder="21" required autofocus>			
+			</fieldset>		    
+			<fieldset class="fieldSets">
+				<label for="inputUsername" >Username</label>
+				<input type="username" name="inputUsername" id="inputUsername" class="form-control" placeholder="Username" required autofocus><br>
+				<label for="inputPassword" >Password</label>
+				<input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>	
+			</fieldset>			
+			<fieldset class="fieldSets">			
+				<label for="nature">
+					<span>Which of the following best describes you?</span>
+				</label>			
+	
+				<select id="nature" class="loginField" name="nature" style="width:10vw;padding:5px;">
+					<option value="introvert">Introvert</option>
+					<option value="extrovert">Extrovert</option>
+					<option value="ambivert">Ambivert</option>
+				</select>
+			</fieldset>
+			<fieldset class="fieldSets">
+				<legend>Choose your interests</legend>
+				<div>
+					<input type="checkbox" id="Nonfiction" name="interest" value=0>
+					<label for="Nonfiction">Nonfiction</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Essay" name="interest" value=1>
+					<label for="Essay">Essay</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Biography" name="interest" value=2>
+					<label for="Biography">Biography</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Autobiography" name="interest" value=3>
+					<label for="Autobiography">Autobiography</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Speech" name="interest" value=4>
+					<label for="Speech">Speech</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Drama" name="interest" value=5>
+					<label for="Drama">Drama</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Poetry" name="interest" value=6>
+					<label for="Poetry">Poetry</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Fantasy" name="interest" value=7>
+					<label for="Fantasy">Fantasy</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Humor" name="interest" value=8>
+					<label for="Humor">Humor</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Fable" name="interest" value=9>
+					<label for="Fable">Fable</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Fairy Tales" name="interest" value=10>
+					<label for="Fairy Tales">Fairy Tales</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Science Fiction" name="interest" value=11>
+					<label for="Science Fiction">Science Fiction</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Shorts" name="interest" value=12>
+					<label for="Shorts">Shorts</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Realistic Fiction" name="interest" value=13>
+					<label for="Realistic Fiction">Realistic Fiction</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Folklore" name="interest" value=14>
+					<label for="Folklore">Folklore</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Historical Fiction" name="interest" value=15>
+					<label for="Historical  Fiction">Historical Fiction</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Horror" name="interest" value=16>
+					<label for="Horror">Horror</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Mystery" name="interest" value=17>
+					<label for="Mystery">Mystery</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Mythology" name="interest" value=18>
+					<label for="Mythology">Mythology</label>
+				</div>
+			</fieldset class="fieldSets">
+			<button type="submit" class="loginField" style="background-color:rgb(10,10,10,0.7);color:rgb(255,255,255,0.7);margin-top:2vw;padding:.5vw;width:10vw;float:right;cursor:pointer">Sign Up</button>			
+		</form>
+		<div class="emptybox"></div>
+	</div>	
+	<div class="emptybox"></div>
+</div>
+
+<style>
+.loginField{
+	background-color: rgb(255,255,255,0.7);
+	color: rgb(10,10,10,0.7);
+	margin:.3vw 1vw;
+	width:23vw;
+	padding:.8vw;
+	font-size:1.3vw;
+	border-radius:1.5vw;
+	text-align:center;
+}
+
+.cardContainer{
+	margin-left:7vw;
+	width:40vw;
+	text-align:left;
+	padding:5vw 2vw;
+	border-radius:1.5vw;
+	background-color:rgb(100,100,100,.2);
+}
+</style>

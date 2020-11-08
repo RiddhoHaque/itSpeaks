@@ -1,0 +1,2 @@
+<script> alert ("Username already exists! Login to that account?") </script>
+<p><a class="btn btn-lg btn-success" href="userLogin" role="button">Sign in</a>

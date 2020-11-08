@@ -1,0 +1,15 @@
+{% extends "flashedMessages.html" %}
+<div class="container">
+
+      <div class="jumbotron">
+        <h1>Login</h1>
+        <form class="form-signin" action="/signIn" method="post">
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input type="username" name="inputUsername" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="inputPassword" id="inputPassword" class="form-control" placeholder="Password" required>
+        
+        <button id="btnSignIn" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+</div>
+

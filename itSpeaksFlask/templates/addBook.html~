@@ -1,0 +1,122 @@
+<form method=POST enctype=multipart/form-data action="/bookAddition">    
+	<h1>Book Profile</h1>	
+	<fieldset>		    
+		<label for="bookName" class="sr-only">Title</label>
+		<input type="name" name="bookName" id="bookName" class="form-control" placeholder="Title" required autofocus>
+	</fieldset>
+	<fieldset>		    
+		<label for="authorName" class="sr-only">Author</label>
+		<input type="name" name="authorName" id="authorName" class="form-control" placeholder="Author" required autofocus>
+	</fieldset>
+	<fieldset>		    
+		<label for="year" class="sr-only">Year</label>
+		<input type="name" name="year" id="year" class="form-control" placeholder="1997" required autofocus>
+	</fieldset>
+	<fieldset>		    
+		<label for="publisher" class="sr-only">Publisher</label>
+		<input type="name" name="publisher" id="publisher" class="form-control" placeholder="Some unknown Publisher" required>
+	</fieldset>
+	<fieldset>			
+		<label for="isPrivate" class="sr-only">Do you want this book to be available to others around the world?</label>		    
+		<fieldset>
+			<input type="radio" name="isPrivate" value=0> Yes<br>
+			<input type="radio" name="isPrivate" value=1> No<br>
+		</fieldset>			
+	</fieldset>
+	<fieldset>
+			<legend>What genre(s) do you think the book belongs to?</legend>
+			<div>
+				<input type="checkbox" id="Nonfiction" name="genres" value=0>
+				<label for="Nonfiction">Nonfiction</label>
+			</div>
+			<div>
+				<input type="checkbox" id="Essay" name="genres" value=1>
+				<label for="Essay">Essay</label>
+			</div>
+			<div>
+				<input type="checkbox" id="Biography" name="genres" value=2>
+				<label for="Biography">Biography</label>
+			</div>
+			<div>
+				<input type="checkbox" id="Autobiography" name="genres" value=3>
+				<label for="Autobiography">Autobiography</label>
+			</div>
+			<div>
+				<input type="checkbox" id="Speech" name="genres" value=4>
+				<label for="Speech">Speech</label>
+			</div>
+			<div>
+				<input type="checkbox" id="Drama" name="genres" value=5>
+				<label for="Drama">Drama</label>
+			</div>
+			<div>
+				<input type="checkbox" id="Poetry" name="genres" value=6>
+				<label for="Poetry">Poetry</label>
+			</div>
+			<div>
+				<input type="checkbox" id="Fantasy" name="genres" value=7>
+				<label for="Fantasy">Fantasy</label>
+			</div>
+			<div>
+				<input type="checkbox" id="Humor" name="genres" value=8>
+				<label for="Humor">Humor</label>
+			</div>
+			<div>
+				<input type="checkbox" id="Fable" name="genres" value=9>
+				<label for="Fable">Fable</label>
+			</div>
+			<div>
+				<input type="checkbox" id="Fairy Tales" name="genres" value=10>
+				<label for="Fairy Tales">Fairy Tales</label>
+			</div>
+			<div>
+				<input type="checkbox" id="Science Fiction" name="genres" value=11>
+				<label for="Science Fiction">Science Fiction</label>
+			</div>
+			<div>
+				<input type="checkbox" id="Shorts" name="genres" value=12>
+				<label for="Shorts">Shorts</label>
+			</div>
+			<div>
+				<input type="checkbox" id="Realistic Fiction" name="genres" value=13>
+				<label for="Realistic Fiction">Realistic Fiction</label>
+			</div>
+			<div>
+				<input type="checkbox" id="Folklore" name="genres" value=14>
+				<label for="Folklore">Folklore</label>
+			</div>
+			<div>
+				<input type="checkbox" id="Historical Fiction" name="genres" value=15>
+				<label for="Historical  Fiction">Historical Fiction</label>
+			</div>
+			<div>
+				<input type="checkbox" id="Horror" name="genres" value=16>
+				<label for="Horror">Horror</label>
+			</div>
+			<div>
+				<input type="checkbox" id="Mystery" name="genres" value=17>
+				<label for="Mystery">Mystery</label>
+			</div>
+			<div>
+				<input type="checkbox" id="Mythology" name="genres" value=18>
+				<label for="Mythology">Mythology</label>
+			</div>
+		</fieldset>
+	<fieldset>		    
+		<label for=book class="sr-only">Upload the book as a text file (.txt)</label>
+		<input type=file name=book id="book" class="form-control">
+	</fieldset>
+	<fieldset>
+		<label for=bookCover class="sr-only">Upload a thumbnail of the book cover (.jpg)</label>
+		<input type=file name=bookCover id="bookCover" class="form-control">
+	</fieldset>
+	<input type="submit" name='btn' value="Submit"  /
+		input[type=submit] {
+		    padding:5px 15px; 
+		    background:#ccc; 
+		    border:0 none;
+		    cursor:pointer;
+		    -webkit-border-radius: 5px;
+		    border-radius: 5px; 
+		}>	
+</form>

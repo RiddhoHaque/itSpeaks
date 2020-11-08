@@ -1,0 +1,199 @@
+CREATE TABLE Users (
+    UserID int NOT NULL AUTO_INCREMENT,
+    Name varchar(255) NOT NULL,
+    Email varchar(255) NOT NULL,
+    Gender varchar(255) NOT NULL,
+	Age int,
+	Username varchar(255) NOT NULL,
+	Password varchar(255) NOT NULL,
+	interestMask int,
+    PRIMARY KEY (UserID),
+	UNIQUE KEY (Username, Password)
+);
+
+ALTER TABLE Users
+ADD nature varchar(25);
+
+CREATE TABLE Books (
+    BookID int NOT NULL AUTO_INCREMENT,
+    Name varchar(255) NOT NULL,
+    Author varchar(255) NOT NULL,
+    genreMask INT,
+	year INT,
+	publisher INT,
+	isPrivate BOOLEAN,
+	file_address varchar(255) NOT NULL,
+    PRIMARY KEY (BookID)
+);
+
+ALTER TABLE Books 
+DROP COLUMN publisher;
+
+ALTER TABLE Books  
+ADD COLUMN publisher varchar(255);
+
+ALTER TABLE Books
+ADD COLUMN thumbnail_address varchar(255);
+
+ALTER TABLE Books
+  ADD COLUMN uploaderID INT,
+  ADD FOREIGN KEY UPLOADER_ID_FK(uploaderID) REFERENCES Users(UserID) ON DELETE CASCADE;
+
+ALTER TABLE Books
+ADD COLUMN audiobook_folder varchar(255);
+
+CREATE TABLE BLOGPOSTS(
+	BlogID int NOT NULL AUTO_INCREMENT,
+	UserID int,
+	Message varchar(1000),
+    PRIMARY KEY (BlogID),
+	CONSTRAINT FOREIGN KEY FK_UID (UserID) REFERENCES Users(UserID)
+);
+
+CREATE TABLE UPVOTES(
+	BlogID int,
+	UserID int,
+	PRIMARY KEY (BlogID, UserID),
+	CONSTRAINT FOREIGN KEY FK_UID (UserID) REFERENCES Users(UserID),
+	CONSTRAINT FOREIGN KEY FK_BID (BlogID) REFERENCES BLOGPOSTS(BlogID)
+);
+
+CREATE TABLE REVIEWS(
+	ReviewID int NOT NULL AUTO_INCREMENT,
+	BookID int,
+	UserID int, 
+	Message varchar(1000),
+	PRIMARY KEY(ReviewID),
+	CONSTRAINT FOREIGN KEY FK_UID (UserID) REFERENCES Users(UserID),
+	CONSTRAINT FOREIGN KEY FK_BID (BookID) REFERENCES Books(BookID)
+);
+
+CREATE TABLE REVIEW_UPVOTES(
+	ReviewID int,
+	UserID int, 
+	PRIMARY KEY(ReviewID, UserID),
+	CONSTRAINT FOREIGN KEY FK_UID (UserID) REFERENCES Users(UserID),
+	CONSTRAINT FOREIGN KEY FK_RID (ReviewID) REFERENCES REVIEWS(ReviewID)
+);
+
+
+CREATE TABLE RATINGS(
+	UserID int,
+	BookID int,
+	Rating int,
+	PRIMARY KEY(UserID, BookID),		
+	CONSTRAINT FOREIGN KEY FK_UID (UserID) REFERENCES Users(UserID),
+	CONSTRAINT FOREIGN KEY FK_BID (BookID) REFERENCES Books(BookID),
+	CONSTRAINT RATING_CHK CHECK (Rating BETWEEN 0 AND 5)
+);
+
+CREATE TABLE READINGS(
+	UserID int,
+	BookID int,
+	PRIMARY KEY(UserID, BookID),		
+	CONSTRAINT FOREIGN KEY FK_UID (UserID) REFERENCES Users(UserID),
+	CONSTRAINT FOREIGN KEY FK_BID (BookID) REFERENCES Books(BookID)
+);
+
+CREATE TABLE FOLLOWING(
+	FOLLOWINGID int,
+	FOLLOWERID int,
+	PRIMARY KEY(FOLLOWINGID, FOLLOWERID),
+	CONSTRAINT FOREIGN KEY FING_ID(FOLLOWINGID) REFERENCES Users(UserID),
+	CONSTRAINT FOREIGN KEY FED_BID (FOLLOWERID) REFERENCES Users(UserID)		
+);
+
+
+
+
+DROP procedure IF EXISTS sp_validate_username_and_email;
+DELIMITER $$
+CREATE PROCEDURE sp_validate_username_and_email(
+	IN usernamein varchar(255),
+	IN Emailin varchar(255)
+)
+BEGIN
+	select * from Users where Username=usernamein or Email=Emailin; 
+END$$
+DELIMITER;
+
+
+DROP procedure IF EXISTS sp_createUser;
+DELIMITER $$
+CREATE PROCEDURE `sp_createUser`(
+    IN Namein varchar(255), IN Emailin varchar(255), IN Genderin varchar(255), IN Agein int,IN Usernamein varchar(255),IN Passwordin varchar(255),IN interestMaskin int,IN naturein varchar(25))
+BEGIN
+    if (select exists (select 1 from Users where Username = Usernamein)) THEN
+         select 'Username Exists !!';  
+    ELSE
+     	insert into Users( Name,  Email,  Gender,  Age,  Username,  Password,  interestMask,  nature) 
+        values           (Namein, Emailin,Genderin,Agein,Usernamein,Passwordin,interestMaskin,naturein);
+    END IF;
+END$$
+DELIMITER ;
+
+
+DROP procedure IF EXISTS sp_validateUser;
+DELIMITER $$
+CREATE PROCEDURE `sp_validateUser`(
+    IN usernamein varchar(255),
+    IN Passwordin varchar(255)
+)
+BEGIN
+    select userid from Users
+	where usernamein=username and Passwordin=Password; 
+END$$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS sp_get_number_of_books_uploaded_by_user;
+DELIMITER $$
+CREATE PROCEDURE `sp_get_number_of_books_uploaded_by_user`(
+    IN uploaderIDin INT
+)
+BEGIN
+    select count(BookID) from Books
+	where uploaderID=uploaderIDin; 
+END$$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS sp_addBook;
+DELIMITER $$
+CREATE PROCEDURE `sp_addBook`( IN Namein varchar(255), IN Authorin varchar(255), IN genreMaskin INT, IN yearin INT, IN publisherin varchar(255), IN isPrivatein BOOLEAN, IN file_addressin varchar(255), IN thumbnail_addressin varchar(255) , IN folder_addressin varchar(255), IN uploaderIDin INT)
+BEGIN
+	insert into Books( Name,  Author,  genreMask, year, publisher, isPrivate, file_address, thumbnail_address, audiobook_folder, uploaderID) 
+       values ( Namein,  Authorin,  genreMaskin, yearin, publisherin, isPrivatein, file_addressin, thumbnail_addressin, folder_addressin, uploaderIDin);    
+END$$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS sp_get_next_book_id;
+DELIMITER $$
+CREATE PROCEDURE `sp_get_next_book_id`()
+BEGIN
+    select max(BookID)+1 from Books;
+END$$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS sp_get_next_blog_id;
+DELIMITER $$
+CREATE PROCEDURE `sp_get_next_blog_id`()
+BEGIN
+    select max(BlogID)+1 from BLOGPOSTS;
+END$$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS sp_addBlog;
+DELIMITER $$
+CREATE PROCEDURE `sp_addBlog`(
+	IN useridin INT,
+	IN Messagein varchar(1000)
+)
+BEGIN
+    insert into BLOGPOSTS( UserID,  Message) 
+       values ( useridin,  Messagin);
+END$$
+DELIMITER ;
+
+

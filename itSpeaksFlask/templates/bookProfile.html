@@ -1,0 +1,88 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+	<link rel="stylesheet" href="/static/style.css"> 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<div class="container" style="background: url(/static/img/bookBack.jpg) fixed;background-size:cover;">> 
+	<div class="topnav">
+		<a class="topnavLogo" href="home.html"><img src="/static/img/logo.png" style="width:13.5vw;height;auto;"></a>
+		<form class="topNavSearch" method="post" action="/search" >
+			<input class="topNavSearchBar" name="searchBar" id="searchBar" type="text" placeholder="Search..." style="padding-left:10;">
+			<button class="fa fa-search" type="submit" style="position:absolute;
+												width:3vw;
+												height:3vw;
+												border:none;
+												border-radius:0.75vw;
+												left:60vw;
+												top:.75vw;
+												cursor:pointer;">
+			</button>
+		</form>
+		<div class="topnavButtons">
+			<a class="topnavLogo" href="home.html"><img src="/static/img/books.png" style="width:9vw;height;auto;"></a>
+			<a class="topnavLogo" href="profile.html"><img src="/static/img/user.png" style="width:9vw;height;auto;"></a>	  
+			<a class="topnavLogo" href="http://0.0.0.0:8080/logout"><img src="/static/img/logout.png" style="width:9vw;height;auto;"></a>
+		</div>
+	</div>	
+	<!--topnav ends here-->	
+	
+	<div style="display:flex; padding:9% 0%;width:100vw;background-color:rgb(76,125,80,0.1);">
+		<div class="bookCoverContainer" style="padding:10vw 15vw;height:30vw;width:20vw;">
+			<img src="{{book.thumbnailAddress}}" style="width:100%;height:auto;overflow:hidden;">
+			<div class="rating" style="padding:10 0;">
+				<a href="rating/5/{{bookID}}"><span>☆5</span></a>
+				<a href="rating/4/{{bookID}}"><span>☆4</span></a>
+				<a href="rating/3/{{bookID}}"><span>☆3</span></a>
+				<a href="rating/2/{{bookID}}"><span>☆2</span></a>
+				<a href="rating/1/{{bookID}}"><span>☆1</span></a>
+			</div>
+		</div>
+		<div class="bookInfoContainer" style="width:35vw;height30vw;padding-left:5vw;padding-top:4vw;padding-bottom:4vw;background-color:rgb(240,240,160,0.4);border-radius:50px;">
+			<div class="bookInfo" style="width:35vw;height:auto:">
+				<h2>Book Name: {{book.name}}</h2><br>
+				<h5>Author: {{book.author}}</h5>
+				<h5>Publisher: {{book.publisher}}</h5>
+				<h5>Year: {{book.year}}</h5>
+				<h5>Uploaded by: {{book.uploaderName}}</h5>
+				<h5>Read by: {{book.readCount}}</h5>
+				<h5>Rating: {{book.rating}}</h5>
+				<h5>Genre: </h5>
+				{% for genre in genreList %}
+				<h5>{{genre}}	</h5>
+				{% endfor %}
+				<br><br>
+				
+			</div>
+			<div style="display:flex;padding-top:4.6%;width:35vw;">
+				<form method="post" action="readBook/{{bookID}}" style="width:100%">
+					<button type="submit" class="buttons" style="width:60%;height:10%;">READ</button>
+				</form>
+				<form method="post" action="playBook/{{bookID}}" style="width:100%">
+					<button type="submit" class="buttons" style="width:60%;height:10%;">PLAY</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div class="postbox">
+		<form method="post" action="/reviewAddition">
+			<img class="thumb" src="{{myDP}}"><br>
+			<input hidden type="text" name="bookID" id="bookID" value="{{bookID}}">
+			<textarea name="statusBody" id="statusBody" placeholder="Write a review.." style="width:60%;height:30%;margin:20 0;font-size:18px;"></textarea><br>
+			<button type="submit" class="buttons">post</button>
+		</form>
+	</div>
+	
+	{% for review in revList %}
+	<div class="blogPost">
+		<img class="thumb" src="{{review.profilePhoto}}">
+		<a href="https://www.facebook.com/Otpid"><h3 class="blogTitle">{{review.name}}</h3></a>
+		<p>{{review.reviewBody}} </p>
+	</div>
+	{% endfor %}
+	
+	
+
+
+	
+</div>

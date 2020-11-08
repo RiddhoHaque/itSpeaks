@@ -1,0 +1,184 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+	<link rel="stylesheet" href="/static/style.css"> 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<div class="container" style="background-color:rgb(240,240,160,0.3);">
+	<div class="topnav">
+		<a class="topnavLogo" href="home.html"><img class="active" src="/static/img/logo.png" style="width:13.5vw;height;auto;"></a>
+		<form class="topNavSearch" method="post" action="/search" >
+			<input class="topNavSearchBar" name="searchBar" id="searchBar" type="text" placeholder="Search..." style="padding-left:10;">
+			<button class="fa fa-search" type="submit" style="position:absolute;
+												width:3vw;
+												height:3vw;
+												border:none;
+												border-radius:0.75vw;
+												left:60vw;
+												top:.75vw;
+												cursor:pointer;">
+			</button>
+		</form>
+		<div class="topnavButtons">
+			<a class="topnavLogo" href="home.html"><img src="/static/img/books.png" style="width:9vw;height;auto;"></a>
+			<a class="topnavLogo" href="profile.html"><img src="/static/img/user.png" style="width:9vw;height;auto;"></a>	  
+			<a class="topnavLogo" href="logout"><img src="/static/img/logout.png" style="width:9vw;height;auto;"></a>
+		</div>
+	</div>
+
+
+	<div class="emptybox"></div>
+
+	<div class="pageBody" style="display:flex;padding:5vw;">
+		<div class="left">
+
+			<div class="homePostCard">
+				<div class="homeHeaderText">
+					Add a post
+				</div>		
+				<div class="homePostBox">
+					<form method=POST action="/blogAddition">
+						<div class="PostHeaderContainer">
+							<div class="thumbContainer">
+								<img class="thumb" src="{{myDP}}">
+							</div>
+							<div class="postHeaderName">
+								{{myName}}
+							</div>
+						</div>					
+						<textarea name="statusBody" id="statusBody" placeholder="What's on your mind?"
+						style="width:100%;height:20%;margin:1vw 0;font-size:1.2vw;"></textarea><br>
+						<button type="submit" class="buttons" type="button" style="width:40%;float:right">Post</button><br><br>
+						<form action="/addBook">
+							<button class="buttons" type="submit" style="width:40%;float:right">Upload a file</button>
+						</form>
+					</form>
+				</div>
+			</div>
+		
+			<div class="homePostCard">
+				<div class="homeHeaderText">
+					Books you may like
+				</div>
+				{% for upBooks in bookRecommendations %}
+				<div class="uploadedBook" style="display:flex;align-items:center;padding:.5vw;margin-bottom:2vw;">
+			
+					<div class="bookContainer" style="width:33%;max-height:40%;overflow:hidden;display:flex;align-items:center;border-radius:15px;" >
+						<a href=/bookProfile/{{upBooks.bookID}}"><img src="{{upBooks.thumbnail}}" style ="width:100%;height:auto;"></a>
+					</div>
+			
+					<div class="bookInfoContainer" style="width:60%;overflow:hidden;opacity:.85;padding-left:1vw;text-align:left;" >
+						<div style="color:white; font-size: 1.2vw;background-color:teal; border-radius:10px; padding: .75vw 0vw; margin:1vw 0;text-align:Center;">
+							{{upBooks.name}}
+						</div>
+						<div class="homeBodyText">
+							{{upBooks.author}}
+						</div>
+						<div class="homeBodyText">
+							{{upBooks.ratingMessage}}
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			
+			<div class="homePostCard">
+				<div class="homeHeaderText">
+					Suggested Friends
+				</div>
+				{% for friends in friendSuggestions %}
+				<div class="uploadedBook" style="display:flex;align-items:center;padding:.5vw;margin-bottom:2vw;">
+			
+					<div class="bookContainer" style="width:40%;max-height:40%;overflow:hidden;display:flex;align-items:center;border-radius:15px;" >
+						<a href="/userProfile/{{friends.username}}"><img src="{{friends.profilePhoto}}" style ="width:100%;height:auto;"></a>
+					</div>
+			
+					<div class="bookInfoContainer" style="width:60%;overflow:hidden;opacity:.85;padding-left:1vw;text-align:left;" >
+						<div style="color:white; font-size: 1.2vw;background-color:teal; border-radius:10px; padding: .75vw 0vw; margin:1vw 0;text-align:Center;">
+							{{friends.name}}
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	
+		<div class="right">
+			<div class="homeHeaderText">
+				Feed
+			</div>
+			{% for post in blogList%}
+			<div style="margin:1vw 0vw;">
+				<div class="PostHeaderContainer">
+					<div class="thumbContainer">
+						<a href="/userProfile/{{post.username}}"><img class="thumb" src="{{post.bloggerPhoto}}"></a>
+					</div>
+					<a href="/userProfile/{{post.username}}" style="text-decoration:none"><div class="postHeaderName">
+						{{post.bloggerName}}
+					</div></a>
+				</div>
+				<div class="postBody">
+					<p>{{post.blogMessage}}</p>
+				</div>
+				<div class="reactionHolder">
+					<div class="reaction">
+						{% if post.isUpvoted %}
+						<a href="/addUpvote/{{post.blogID}}"><img type="submit" src="/static/img/loved.png" style="width:100%"></a>
+						{% else %}
+						<a href="/addUpvote/{{post.blogID}}"><img type="submit" src="/static/img/love.png" style="width:100%"></a>
+						{% endif %}
+					</div>
+					<div class="reactionCount">
+						{{post.upvoteCount}} Likes
+					</div>
+					
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
+				
+<style>
+.homePostCard{
+	width:100%;
+	margin-bottom: 4vw;
+	background-color:rgb(50,50,50,.0);
+	border-radius:1vw;
+	padding-bottom:1.5vw;
+}
+.homeHeaderText{
+	color:rgb(0, 150, 130); 
+	font-size: 1.6vw;
+	background-color:rgb(10, 10, 10, 0.1); 
+	border-radius: 0vw;
+	padding: 1vw;
+}
+
+.homeBodyText{
+	width:85%;
+	color:teal; 
+	font-size: 1.0 vw; 
+	background-color:rgb(10,10,10,0.1); 
+	border-radius:1vw;
+	padding:.2vw 7.5%;
+	margin: .5vw 0vw;
+}
+.homeBodyText span{
+	color:white; 
+	float: right;
+}
+.homePostBox{
+	padding:2vw;
+	width:26vw;
+}
+.left{
+	width:30vw;
+	margin-right:1.5vw;
+	
+}
+.right{
+	width:58vw; 
+	margin-left:.5vw;
+}
+</style>

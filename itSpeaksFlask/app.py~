@@ -1,0 +1,236 @@
+from flaskext.mysql import MySQL
+from flask import Flask, render_template, json, request, redirect, session,jsonify, flash, url_for
+from werkzeug import generate_password_hash, check_password_hash
+import abc, six
+import os
+from werkzeug.utils import secure_filename
+import subprocess
+
+UPLOAD_FOLDER = '/home/even/itSpeaksFlask/uploads/static'
+BOOK_ALLOWED_EXTENSIONS = set(['txt'])
+COVER_ALLOWED_EXTENSIONS = set(['jpg', 'jpeg'])
+
+
+itSpeaksApp=Flask(__name__, static_url_path='/static')
+itSpeaksApp.secret_key = 'Shhh...its secret'
+
+__mysql = MySQL()
+itSpeaksApp.config['MYSQL_DATABASE_USER'] = 'root'
+itSpeaksApp.config['MYSQL_DATABASE_PASSWORD'] = 'ostad21'
+itSpeaksApp.config['MYSQL_DATABASE_DB'] = 'itSpeaks'
+itSpeaksApp.config['MYSQL_DATABASE_HOST'] = 'localhost'
+itSpeaksApp.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+__mysql.init_app(itSpeaksApp)
+
+
+@itSpeaksApp.route('/signUp',methods=['POST','GET'])
+def addUser():		
+	_name=request.form['inputName']
+	_email=request.form['inputEmail']
+	_gender=request.form['gender']
+	_age=request.form['inputAge']
+	_username=request.form['inputUsername']
+	_password=request.form['inputPassword']
+	_nature=request.form['nature']
+	#_hashed_password=generate_password_hash(_password)	
+	_input_mask=int(0);	
+	_interest= request.form.getlist("interest")	
+	for i in _interest:
+		_input_mask=int(_input_mask)+int((1<<int(i)))	
+	conn= __mysql.connect()	
+	cursor = conn.cursor()
+	cursor.callproc('sp_validate_username_and_email', (_username, _email))
+	exist_check=cursor.fetchall()	
+	if(len(exist_check)!=0):		
+		conn.commit()
+		conn.close()
+		cursor.close()		
+		return render_template('user_already_exists.html')		
+	else:	
+		cursor.callproc('sp_createUser',(_name, _email, _gender, int(_age), _username, _password, int(_input_mask), _nature))
+		conn.commit()	
+		conn.close()
+		cursor.close()		
+		return render_template('signUpSuccessful.html')
+
+@itSpeaksApp.route('/userRegistration')
+def registrationPage():	
+	return render_template('user_reg.html')
+
+@itSpeaksApp.route('/signIn',methods=['POST','GET'])
+def validateUser():
+	_username=request.form['inputUsername']
+	_password=request.form['inputPassword']
+	conn= __mysql.connect()	
+	cursor = conn.cursor()
+	cursor.callproc('sp_validateUser', (_username, _password))
+	data=cursor.fetchall()	
+	conn.commit()
+	conn.close()
+	cursor.close()	
+	if len(data) > 0:
+		session['userid']=data[0][0]
+		return redirect('/userhome')
+	else:
+		flash('Incorrect credentials!!')
+		return redirect('/userLogin')
+
+@itSpeaksApp.route('/userLogin')
+def loginUser():
+	return render_template('user_login.html')
+
+@itSpeaksApp.route('/userhome')
+def homeOfUser():
+	return render_template('home.html')
+
+def allowed_book_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in BOOK_ALLOWED_EXTENSIONS
+
+def allowed_cover_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in COVER_ALLOWED_EXTENSIONS
+
+@itSpeaksApp.route('/logout')
+def endSession():
+	session.pop('userid',None)
+	flash('Byebye')	
+	return redirect('/')
+
+def get_book_name(uploader_id):
+	conn= __mysql.connect()	
+	cursor = conn.cursor()
+	cursor.callproc('sp_get_next_book_id')
+	data=cursor.fetchall()	
+	conn.commit()
+	conn.close()
+	cursor.close()
+	return 'texts/'+str(uploader_id) + '_' + str(data[0][0])+'.txt'
+
+def get_cover_name(uploader_id):
+	conn= __mysql.connect()	
+	cursor = conn.cursor()
+	cursor.callproc('sp_get_next_book_id')
+	data=cursor.fetchall()	
+	conn.commit()
+	conn.close()
+	cursor.close()
+	return 'covers/'+str(uploader_id) + '_' + str(data[0][0])+ '.jpg'
+
+def get_folder_name(uploader_id):
+	conn= __mysql.connect()	
+	cursor = conn.cursor()
+	cursor.callproc('sp_get_next_book_id')
+	data=cursor.fetchall()	
+	conn.commit()
+	conn.close()
+	cursor.close()
+	return 'audiobooks/'+str(uploader_id) + '_' + str(data[0][0])
+
+def get_blog_name(uploader_id):
+	conn= __mysql.connect()	
+	cursor = conn.cursor()
+	cursor.callproc('sp_get_next_blog_id')
+	data=cursor.fetchall()	
+	conn.commit()
+	conn.close()
+	cursor.close()
+	return 'blogs/'+str(uploader_id) + '_' + str(data[0][0])
+
+def textToWav(text,folder_name, cnt):
+   subprocess.call(["espeak", "-w"+folder_name+'/'+str(cnt)+".wav", text, "-s "+str(100)])
+
+@itSpeaksApp.route('/addBook')
+def addBook():
+	return render_template('addBook.html')
+
+@itSpeaksApp.route('/searchMenu')
+def showSearchOptions():
+	return render_template('searchMenu.html')
+
+@itSpeaksApp.route('/bookAddition',methods=['POST','GET'])
+def addToLibrary():
+	_title=request.form['bookName']
+	_author=request.form['authorName']
+	_year=request.form['year']
+	_publisher=request.form['publisher']
+	_privacy_status=request.form['isPrivate']
+	_genre_mask=int(0);	
+	_genres= request.form.getlist("genres")	
+	_uploader_id= session['userid']	
+	for i in _genres:
+		_genre_mask=int(_genre_mask)+int((1<<int(i)))			
+	if 'book' not in request.files:
+		flash('No text to upload')
+		return redirect('/addBook')
+	book = request.files['book']
+	if book.filename == '':
+		flash('No selected file')
+		return redirect('/addBook')
+	if book and allowed_book_file(book.filename):
+		_bookfilename = get_book_name(_uploader_id)
+		book.save(os.path.join(itSpeaksApp.config['UPLOAD_FOLDER'], _bookfilename))	
+	bookCover=request.files.get('bookCover', None)
+	if bookCover is None:
+		_coverfilename='covers/default_book_cover.jpg'
+	elif bookCover and allowed_cover_file(bookCover.filename):
+		_coverfilename = get_cover_name(_uploader_id)
+		bookCover.save(os.path.join(itSpeaksApp.config['UPLOAD_FOLDER'], _coverfilename))
+	else:
+		_coverfilename=''
+	_foldername=get_folder_name(_uploader_id)	
+	_folderpath=UPLOAD_FOLDER+'/'+_foldername
+	os.makedirs(_folderpath)
+	file = open(UPLOAD_FOLDER+'/'+_bookfilename, "r")
+	text=file.read()
+	cnt=0
+	l=0
+	r=min(len(text), 1000)
+	while(l<len(text)):
+		if(r== len(text)):
+			textToWav(text[l:], _folderpath, cnt)			
+		else:		
+			textToWav(text[l: -(len(text)-r)], _folderpath, cnt)
+		cnt=cnt+1
+		l=r+1
+		r=r+1000
+		r=min(r, len(text))
+		
+	conn= __mysql.connect()	
+	cursor = conn.cursor()
+	cursor.callproc('sp_addBook', (_title, _author, _genre_mask, _year, _publisher, _privacy_status, _bookfilename, _coverfilename, _foldername, _uploader_id))
+	data=cursor.fetchall()	
+	conn.commit()
+	conn.close()
+	cursor.close()
+	flash('book added to library')
+	return redirect('/userhome')
+
+@itSpeaksApp.route('/blogAddition', methods=['POST','GET'])
+def addBlog():
+	_text=request.form['statusBody']
+	print(_text)
+	_uploader_id= session['userid']
+	if not _text:
+		flash('Nothing to post')
+		return redirect('/userhome')
+	file_name=UPLOAD_FOLDER+"/"+get_blog_name(_uploader_id)
+	f= open(file_name,"w+")	
+	f.write(_text)
+	f.close()
+	conn= __mysql.connect()	
+	cursor = conn.cursor()
+	cursor.callproc('sp_addBlog', (_uploader_id, file_name))
+	data=cursor.fetchall()	
+	conn.commit()
+	conn.close()
+	cursor.close()
+	return redirect('/userhome')
+
+@itSpeaksApp.route('/')
+def main():    
+    return render_template('index.html')
+
+
+if __name__ == "__main__":
+    itSpeaksApp.run(host = '0.0.0.0', port=8080)

@@ -1,0 +1,105 @@
+<head>
+	<link rel="stylesheet" href="style.css"> 
+</head>
+<div class="topnav">
+  <a class="active" href="#home">itSpeaks</a>
+  <a href="#news">Home</a>
+  <a href="#contact">Profile</a>
+  <a href="#about">Logout</a>
+  <a href="https://www.facebook.com/Otpid" style="float:right">Azwad Anjum Dipto</a>
+  
+
+</div>
+
+
+<div class="emptybox"></div>
+<div class="emptybox"></div>
+
+
+
+<div class="postbox">
+	<img class="thumb" src="img/dp.jpg"><br>
+	<textarea autofocus rows="5" cols="70" style="font-size: 20px; padding:10;">What's on your mind?</textarea><br>
+	<button class="buttons" type="button">post</button>
+	<button class="buttons" type="button">upload a file</button>
+</div>
+
+<div class="emptybox"></div>
+<div class="emptybox"></div>
+
+
+<div class="slideShow">
+	<div class="row">
+	<i class="figText">Recommended Books:</i>
+	<br><br>
+	<a href="https://www.google.com"><img class="mySlides" src="img/book1.jpg" height="240" width="160"></a>
+	<a href="https://www.google.com"><img class="mySlides" src="img/book2.jpg" height="240" width="160"></a>
+	<a href="https://www.google.com"><img class="mySlides" src="img/book3.jpg" height="240" width="160"></a>
+	<a href="https://www.google.com"><img class="mySlides" src="img/book4.jpg" height="240" width="160"></a>
+	<a href="https://www.google.com"><img class="mySlides" src="img/book5.jpg" height="240" width="160"></a>
+	<a href="https://www.google.com"><img class="mySlides" src="img/book6.jpg" height="240" width="160"></a>
+	</div>
+
+<!--
+	<button class="w3-button w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+	<button class="w3-button w3-display-right" onclick="plusDivs(+1)">&#10095;</button>
+	<a href="https://www.google.com"><img class="mySlides" src="img/book7.jpg" height="240" width="160"></a>
+	
+		<script>
+		var slideIndex = 1;
+		showDivs(slideIndex);
+
+		function plusDivs(n) {
+			showDivs(slideIndex += n);
+		}
+
+		function showDivs(n) {
+			var x = document.getElementsByClassName("mySlides");
+			if(n<=0)slideIndex=x.size()-1;
+			if(n==x.size)slideIndex=0;
+			
+			for (i = 0; i < x.length; i++) {
+				x[i].style.display = "none"; 
+			}
+			x[slideIndex%x.length].style.display = "block"; 
+			x[(slideIndex+1)%x.length].style.display = "block"; 
+			x[(slideIndex+2)%x.length].style.display = "block"; 
+			x[(slideIndex+3)%x.length].style.display = "block"; 
+		}
+	</script>-->
+</div>
+
+
+<div class="emptybox"></div>
+
+<div class="blogPost">
+	<img class="thumb" src="img/dp.jpg">
+	<a href="https://www.facebook.com/Otpid"><h3 class="blogTitle">Azwad Anjum Dipto</h3></a>
+	<p>We have no clue why Mozilla can not load some simple image files. And Chrome doesn't have color? Getting real tired of this google. Real tired.</p>
+</div>
+<div class="emptybox2"></div>
+
+
+<div class="blogPost">
+	<img class="thumb" src="img/dp2.jpg">
+	<a href="https://www.facebook.com/nafiza.anjum.1"><h3 class="blogTitle">Promee Nafiza Anjum</h3></a>
+	<p>Hello,
+I'm a student of Bangladesh University of Engineering and Technology, from Bangladesh. Students around the country demand the reformation of the Quota allocations provided during recruitment of officers for various public services in Bangladesh. Currently, 30% of the recruitments are allotted to descendants of freedom fighters, 10% of the seats go to applicants from different districts, 10% of the seats go to women, and 5% go to ethnic minorities, and 1% go to differenty abled people, leaving the general population to compete for only 44% of the seats. The whole country's students have been involved in non-violent movements for quite some time now but were brutally attacked by the police force yesterday night.The government already exercises vast control over our national media, thus rendering a lot of grim stories untold. As such, we seek the help of foreign media to cover the true brutality of what is going on in our campus, our university. Please do come forward, as the situation is beyond our control. 
+We need you.
+#BBC #CNN #ReformQuotaBD
+(Try to repost this using the hashtags. If the hashtag trends, we can gain attention.) </p>
+</div>
+<div class="emptybox2"></div>
+
+
+<div class="blogPost">
+	<img class="thumb" src="img/dp3.jpg">
+	<a href="https://www.facebook.com/whymustigothroughallthisshittochangeausername"><h3 class="blogTitle">Nabil Hasan</h3></a>
+	<p>Reading this is an utter waste of your time, almost as much as writing it has been for me.
+Studies Computer Science and Engineering at University of Dhaka
+Studied Science at Dhaka City College
+Went to Faizur Rahman Ideal Institute, Dhaka
+Lives in Dhaka, Bangladesh</p>
+</div>
+<div class="emptybox2"></div>
+

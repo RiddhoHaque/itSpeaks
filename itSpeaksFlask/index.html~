@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="jumbotron">
+        <h1>ItSpeaks</h1>
+        <p class="lead"></p>
+        <p><a class="btn btn-lg btn-success" href="userRegistration" role="button">Sign up and get started!</a>
+		<p><a class="btn btn-lg btn-success" href="userLogin" role="button">Sign in</a>
+        </p>
+    </div>
+    <footer class="footer">
+        <p>&copy; Team Ekush</p>
+    </footer>
+ 
+    </div>
+</body>
+ 
+</html>

@@ -1,0 +1,72 @@
+/* Add a black background color to the top navigation */
+.topnav {
+	position:fixed;
+	left:0px;
+	right:0px;
+	margin:-10;
+	padding-left:200;
+	padding-right:200;
+    background-color: #009688;
+	opacity:.85;
+    overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+	left:200px;
+    color: #f2f2a2;
+    text-align: center;
+    padding: 16px 20px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: #f2f2a2;
+    color: #009688;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.emptybox{
+	padding-top:100px;
+}
+
+.buttons{
+	background-color: #009688;
+    color: white;
+	opacity:.9;
+    padding: 5px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+}
+
+.postbox{
+		padding-left:200px;
+		padding-right:200px;
+		margin:auto;
+		
+		font-size:30px;
+		
+}
+
+.slideshow{
+	padding-left:200;
+	padding-right:150;
+	padding-top:50;
+	padding-bottom:50;
+	float:center;
+	background-color: rgb(76,175,80,0.85);
+	margin:-10;
+}
+
+.figText{
+	color:rgb(76,175,80,0.85);
+}

@@ -1,0 +1,84 @@
+<head>
+	<link rel="stylesheet" href="/static/style.css"> 
+</head>
+<div class="container">
+	<div class="topnav">
+		<a class="active" href="home.html" style="padding-left:50; padding-right:50;">itSpeaks</a>
+		<a href="profile.html">Profile</a>
+		<a href="home.html">Books</a>
+		<a href="home.html">Audios</a>
+
+		<a href="home.html" style="float:right">Logout</a>
+		<a href="profile.html" style="float:right">Azwad Anjum Islam</a>	  
+	</div>
+
+
+	<div class="emptybox"></div>
+	<div class="emptybox"></div>
+
+
+
+	<div class="postbox">
+		<form method=POST action="/blogAddition">
+			<img class="thumb" src="img/dp.jpg"><br>
+			<textarea name="statusBody" id="statusBody" rows="5" cols="70" placeholder="What's on your mind?" style="font-size: 20px; font-family: 'Letter Gothic Std'; padding:10;"></textarea><br>
+			<button type="submit" class="buttons" type="button">post</button>
+			<a href="addBook.html"><button class="buttons" type="button">upload a file</button></a>
+		</form>
+	</div>
+
+	<div class="emptybox"></div>
+	<div class="emptybox"></div>
+
+
+	<div class="slideShow">
+		<div class="row">
+		<i class="figText">Recommended Books:</i>
+		<br><br>
+		<a href="https://www.google.com"><img class="mySlides" src="/static/img/book1.jpg"></a>
+		<a href="https://www.google.com"><img class="mySlides" src="/static/img/book2.jpg"></a>
+		<a href="https://www.google.com"><img class="mySlides" src="/static/img/book3.jpg"></a>
+		<a href="https://www.google.com"><img class="mySlides" src="/static/img/book4.jpg"></a>
+		<a href="https://www.google.com"><img class="mySlides" src="/static/img/book5.jpg"></a>
+		<a href="https://www.google.com"><img class="mySlides" src="/static/img/book6.jpg"></a>
+		</div>
+
+
+	</div>
+
+
+	<div class="emptybox"></div>
+
+	<div class="blogPost">
+		<img class="thumb" src="/static/img/dp.jpg">
+		<a href="https://www.facebook.com/Otpid"><h3 class="blogTitle">Azwad Anjum Dipto</h3></a>
+		<p>আমার নাম দীপ্ত। আমি একটি কবিতা বলবো। কবিতার নাম "ওই দেখা যায় তালগাছ।" </p>
+	</div>
+	<div class="emptybox2"></div>
+
+
+
+	<div class="blogPost">
+		<img class="thumb" src="/static/img/dp2.jpg">
+		<a href="https://www.facebook.com/nafiza.anjum.1"><h3 class="blogTitle">Promee Nafiza Anjum</h3></a>
+		<p>Hello,
+	I'm a student of Bangladesh University of Engineering and Technology, from Bangladesh. Students around the country demand the reformation of the Quota allocations provided during recruitment of officers for various public services in Bangladesh. Currently, 30% of the recruitments are allotted to descendants of freedom fighters, 10% of the seats go to applicants from different districts, 10% of the seats go to women, and 5% go to ethnic minorities, and 1% go to differenty abled people, leaving the general population to compete for only 44% of the seats. The whole country's students have been involved in non-violent movements for quite some time now but were brutally attacked by the police force yesterday night.The government already exercises vast control over our national media, thus rendering a lot of grim stories untold. As such, we seek the help of foreign media to cover the true brutality of what is going on in our campus, our university. Please do come forward, as the situation is beyond our control. 
+	We need you.
+	#BBC #CNN #ReformQuotaBD
+	(Try to repost this using the hashtags. If the hashtag trends, we can gain attention.) </p>
+	</div>
+	<div class="emptybox2"></div>
+
+
+	<div class="blogPost">
+		<img class="thumb" src="/static/img/dp3.jpg">
+		<a href="https://www.facebook.com/whymustigothroughallthisshittochangeausername"><h3 class="blogTitle">Nabil Hasan</h3></a>
+		<p>Reading this is an utter waste of your time, almost as much as writing it has been for me.
+	Studies Computer Science and Engineering at University of Dhaka
+	Studied Science at Dhaka City College
+	Went to Faizur Rahman Ideal Institute, Dhaka
+	Lives in Dhaka, Bangladesh</p>
+	</div>
+	<div class="emptybox2"></div>
+
+</div>

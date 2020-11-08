@@ -1,0 +1,92 @@
+				<div>
+					<input type="checkbox" id="Nonfiction" name="interest" value="Nonfiction">
+					<label for="Nonfiction">Nonfiction</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Essay" name="interest" value="Essay">
+					<label for="Essay">Essay</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Biography" name="interest" value="Biography">
+					<label for="Biography">Biography</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Autobiography" name="interest" value="Autobiography">
+					<label for="Autobiography">Autobiography</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Speech" name="interest" value="Speech">
+					<label for="Speech">Speech</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Drama" name="interest" value="Drama">
+					<label for="Drama">Drama</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Poetry" name="interest" value="Poetry">
+					<label for="Poetry">Poetry</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Fantasy" name="interest" value="Fantasy">
+					<label for="Fantasy">Fantasy</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Humor" name="interest" value="Humor">
+					<label for="Humor">Humor</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Fable" name="interest" value="Fable">
+					<label for="Fable">Fable</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Fairy" name="interest" value="Fairy">
+					<label for="Fairy">Fairy</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Tales" name="interest" value="Tales">
+					<label for="Tales">Tales</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Science" name="interest" value="Science">
+					<label for="Science">Science</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Fiction" name="interest" value="Fiction">
+					<label for="Fiction">Fiction</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Shorts" name="interest" value="Shorts">
+					<label for="Shorts">Shorts</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Realistic" name="interest" value="Realistic">
+					<label for="Realistic">Realistic</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Fiction" name="interest" value="Fiction">
+					<label for="Fiction">Fiction</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Folklore" name="interest" value="Folklore">
+					<label for="Folklore">Folklore</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Historical" name="interest" value="Historical">
+					<label for="Historical">Historical</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Fiction" name="interest" value="Fiction">
+					<label for="Fiction">Fiction</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Horror" name="interest" value="Horror">
+					<label for="Horror">Horror</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Mystery" name="interest" value="Mystery">
+					<label for="Mystery">Mystery</label>
+				</div>
+				<div>
+					<input type="checkbox" id="Mythology" name="interest" value="Mythology">
+					<label for="Mythology">Mythology</label>
+				</div>

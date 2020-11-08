@@ -1,0 +1,57 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+	<link rel="stylesheet" href="/static/style.css"> 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<div class="container">
+	<div class="topnav">
+		<a class="topnavLogo" href="home.html"><img src="/static/img/logo.png" style="width:13.5vw;height;auto;"></a>
+		<form class="topNavSearch" method="post" action="/search" >
+			<input class="topNavSearchBar" name="searchBar" id="searchBar" type="text" placeholder="Search..." style="padding-left:10;" value={{searchWord}}>
+			<button class="fa fa-search" type="submit" style="position:absolute;
+												width:3vw;
+												height:3vw;
+												border:none;
+												border-radius:0.75vw;
+												left:60vw;
+												top:.75vw;
+												cursor:pointer;">
+			</button>
+		</form>
+		<div class="topnavButtons">
+			<a class="topnavLogo" href="home.html"><img src="/static/img/books.png" style="width:9vw;height;auto;"></a>
+			<a class="topnavLogo" href="profile.html"><img src="/static/img/user.png" style="width:9vw;height;auto;"></a>	  
+			<a class="topnavLogo" href="logout"><img src="/static/img/logout.png" style="width:9vw;height;auto;"></a>
+		</div>
+	</div>
+
+	<div class="emptybox"></div>
+	<div class="emptybox"></div>
+	<div class="emptybox"></div>
+	<div class="emptybox"></div>
+
+	   
+	<table>
+		 {% for book in bookList %}
+		    <tr>
+		       <th> Name: {{book.name}} </th>
+		    </tr>
+		    <tr>
+		       <th> Author: {{book.author}} </th>
+		    </tr>
+		    <tr>
+		       <th> Publishing Year: {{book.year}} </th>
+		    </tr>
+		    <tr>
+		       <th> PublisherName: {{book.publisher}} </th>
+		    </tr>
+		    <tr>
+		       <th> Cover: <a href="bookProfile/{{book.bookID}}"><img src="{{book.thumbnailAddress}}"> </a> </th>
+		    </tr>
+		 {% endfor %}
+	</table>
+      
+	</body>
+	
+</div>

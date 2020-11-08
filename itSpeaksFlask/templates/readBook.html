@@ -1,0 +1,44 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+	<link rel="stylesheet" href="/static/style.css"> 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<script>
+		function readfile() {
+		    document.getElementById('iframe').contentDocument.body.firstChild.innerHTML;
+		}
+	</script>
+
+</head>
+
+<div class="container">
+	<div class="topnav">
+		<a class="topnavLogo" href="home.html"><img src="/static/img/logo.png" style="width:13.5vw;height;auto;"></a>
+		<form class="topNavSearch" method="post" action="/search" >
+			<input class="topNavSearchBar" name="searchBar" id="searchBar" type="text" placeholder="Search..." style="padding-left:10;">
+			<button class="fa fa-search" type="submit" style="position:absolute;
+												width:3vw;
+												height:3vw;
+												border:none;
+												border-radius:0.75vw;
+												left:60vw;
+												top:.75vw;
+												cursor:pointer;">
+			</button>
+		</form>
+		<div class="topnavButtons">
+			<a class="topnavLogo" href="home.html"><img src="/static/img/books.png" style="width:9vw;height;auto;"></a>
+			<a class="topnavLogo" href="profile.html"><img src="/static/img/user.png" style="width:9vw;height;auto;"></a>	  
+			<a class="topnavLogo" href="http://0.0.0.0:8080/logout"><img src="/static/img/logout.png" style="width:9vw;height;auto;"></a>
+		</div>
+	</div>
+
+	<div class="emptybox"></div>
+	<div class="emptybox"></div>
+	<h2 style="margin-left:100px;"><b>{{bookName}}</b></h2>
+	<h3 style="margin-left:100px;">By <i>{{author}}</i></h3>
+	<br><br>
+	<iframe id='iframe' src = '{{filename}}' onload='readfile()' style="margin-left:100px;width:80%;height:75%;padding:10px 50px;"> </iframe>
+	</body>
+	
+</div>

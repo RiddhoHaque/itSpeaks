@@ -1,0 +1,1 @@
+CALL sp_createUser('Nahian Ashraf', 'raidanahian@gmail.com', 'female', 22, 'rai_ash', 'rai_ash', 1720320, 'introvert');

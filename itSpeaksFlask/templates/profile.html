@@ -1,0 +1,159 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+	<link rel="stylesheet" href="/static/style.css"> 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<div class="container" style="background: url(/static/img/cover.jpg) fixed;background-size:cover;">
+	<div class="topnav">
+		<a class="topnavLogo" href="home.html"><img src="/static/img/logo.png" style="width:13.5vw;height;auto;"></a>
+		<form class="topNavSearch" method="post" action="/search" >
+			<input class="topNavSearchBar" name="searchBar" id="searchBar" type="text" placeholder="Search..." style="padding-left:10;">
+			<button class="fa fa-search" type="submit" style="position:absolute;
+												width:3vw;
+												height:3vw;
+												border:none;
+												border-radius:0.75vw;
+												left:60vw;
+												top:.75vw;
+												cursor:pointer;">
+			</button>
+		</form>
+		<div class="topnavButtons">
+			<a class="topnavLogo" href="http://0.0.0.0:8080/userhome"><img src="/static/img/books.png" style="width:9vw;height;auto;"></a>
+			<a class="topnavLogo" href="http://0.0.0.0:8080/myProfile"><img class="active" src="/static/img/user.png" style="width:9vw;height;auto;"></a>	  
+			<a class="topnavLogo" href="http://0.0.0.0:8080/logout"><img src="/static/img/logout.png" style="width:9vw;height;auto;"></a>
+		</div>
+	</div>	
+	
+	<div class = "profileTop">
+		<div style="width:100%;height:10%;">
+		</div>	
+		
+		<div class="profile" style="display:flex;align-items:center">	
+			<a href="{{userInformation.profilePhoto}}"><img src="{{userInformation.profilePhoto}}" style="width:150%;height:auto;overflow:hidden;"></a> 
+		</div>
+		
+		<div class="profileName" >
+			<b>{{userInformation.name}}</b>
+		</div>
+		<div class="followImageContainer">
+		{% if isFollowing %}
+			<img src="/static/img/following.png" style="width:100%">
+		{% else %}
+			<a href="http://0.0.0.0:8080/addFollow/{{userName}}"><img src="/static/img/follow.png" style="width:100%"></a>
+		{% endif %}
+		</div>
+		<div class="followerText" >
+			<b>Followers: {{userInformation.followedBy}}</b>
+		</div>
+	</div>
+
+
+	<div class="pageBody" style="display:flex;padding:5vw;">
+		<div class="left" style="width:30vw;border-radius:1vw; margin-right:1.5vw;">
+
+			<div class="postCard">		
+				<div class="headerText">
+					Information
+				</div>
+				<div class="bodyText">
+					About: <span>{{userInformation.about}}</span>
+				</div>
+				<div class="bodyText">
+					Email: <span>{{userInformation.email}}</span>
+				</div>
+				<div class="bodyText">
+					Gender: <span>{{userInformation.gender}}</span>
+				</div>
+				<div class="bodyText">
+					Age: <span>{{userInformation.age}}</span>
+				</div>
+				<div class="bodyText">
+					Personality: <span>{{userInformation.nature}}</span>
+				</div>
+				<div class="bodyText">
+					Interests:<br>
+					{% for interest in genreList %}
+					<span>{{interest}}</span><br>
+					{% endfor %}
+				</div>
+				{% if showEdit %}
+				<form method="post" action="/editProfile">
+				<button type="submit" class="buttons" style="float:left;">Edit profile</button>
+				</form>
+				{% endif %}
+			</div>
+		
+			<div class="postCard">
+				<div class="headerText">
+					Uploaded books
+				</div>
+				{% for upBooks in uploadedBookList %}
+				<div class="uploadedBook" style="display:flex;align-items:center;padding:.5vw;margin-bottom:2vw;">
+			
+					<div class="bookContainer" style="width:33%;max-height:40%;overflow:hidden;display:flex;align-items:center;border-radius:15px;" >
+						<a href="/bookProfile/{{upBooks.bookID}}"><img src="{{upBooks.thumbnail}}" style ="width:100%;height:auto;"></a>
+					</div>
+			
+					<div class="bookInfoContainer" style="width:60%;overflow:hidden;opacity:.85;padding-left:1vw;text-align:left;" >
+						<div style="color:white; font-size: 1.2vw;background-color:teal; border-radius:10px; padding: .75vw 0vw; margin:1vw 0;text-align:Center;">
+							{{upBooks.name}}
+						</div>
+						<div class="bodyText">
+							{{upBooks.author}}
+						</div>
+						<div class="bodyText">
+							{{upBooks.ratingMessage}}
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+	
+			<div class="postCard">
+				<div class="headerText">
+					Read books
+				</div>
+				{% for readBooks in readBookList %}
+				<div class="uploadedBook" style="display:flex;align-items:center;padding:.5vw;margin-bottom:2vw;">
+					<div class="bookContainer" style="width:33%;max-height:40%;overflow:hidden;display:flex;align-items:center;border-radius:15px;" >
+						<a href="/bookProfile/{{readBooks.bookID}}"><img src="{{readBooks.thumbnail}}" style ="width:100%;height:auto;"></a>
+					</div>
+			
+					<div class="bookInfoContainer" style="width:60%;overflow:hidden;opacity:.85;padding-left:1vw;text-align:left;" >
+						<div style="color:white; font-size: 1.2vw;background-color:teal; border-radius:10px; padding: .75vw 0vw; margin:1vw 0;text-align:Center;">
+							{{readBooks.name}}
+						</div>
+						<div class="bodyText">
+							{{readBooks.author}}
+						</div>
+						<div class="bodyText">
+							{{readBooks.ratingMessage}}
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+
+		</div>
+	
+		<div class="right" style="background-color:rgb(50,50,50,0.5); width:58vw; border-radius:1vw;margin-left:1.5vw;">
+			<div class="headerText">
+				Recent posts
+			</div>
+			<div posts>
+				{% for post in blogList%}
+				<div style="color:white; font-size: 1.1vw; background-color:rgb(10,10,10,.2); border-radius:10px; padding: .75vw 2vw; margin-top:1vw;text-align:Left;">
+					{{userInformation.name}}
+				</div>
+				<div class="bodyText" style="color:white">
+					{{post.message}}<br><br>
+					{{post.upvotedBy}} upvotes
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	
+</div>
